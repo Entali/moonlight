@@ -1,6 +1,6 @@
 import React from 'react'
-import { signInWithGoogle } from './firebase/auth'
 import { Logo } from './components/Logo'
+import { googleAuth } from './firebase/init'
 import './App.css'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
       <div className="App">
         <header className="App-header">
           <Logo/>
-          <button onClick={signInWithGoogle}>enter</button>
+          <button onClick={googleAuth}>enter</button>
         </header>
       </div>
   );
