@@ -1,5 +1,6 @@
 import React from 'react'
 import { Logo } from './components/Logo'
+import { googleAuth } from './firebase'
 import './App.css'
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
       <div className="App">
         <header className="App-header">
           <Logo/>
-          <button>enter</button>
+          <button onClick={googleAuth}>enter</button>
         </header>
       </div>
   );
