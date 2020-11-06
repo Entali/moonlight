@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer} from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { setUserAction } from './Auth.actions'
 import { INITIAL_STATE, authReducer } from './Auth.reducer'
 import { Button } from 'primereact/button'
