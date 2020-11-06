@@ -7,36 +7,17 @@ const LogoView = () => {
         letterSpacing: '1px'
       }}>
         <span style={{
-          fontSize: '0.7em',
+          fontSize: '0.8em',
           fontWeight: 'lighter'
         }}>M</span>
-        <small style={{
-          position: 'relative',
-          left: '2px',
-          bottom: '-1px',
-          display: 'inline-block',
-          transform: 'rotate(-180deg)',
-          fontSize: '0.7em'
-
-        }}>&#9789;</small>
-        <small style={{
-          fontSize: '0.7em'
-        }}>&#9789;</small>
-        <small style={{
-          position: 'relative',
-          left: '2px',
-          bottom: '-1px',
-          display: 'inline-block',
-          transform: 'rotate(-180deg)',
-          fontSize: '0.7em'
-        }}>&#9789;</small>
-        <small style={{
-          fontSize: '0.7em'
-        }}>&#9789;</small>
+        <small>
+          &#8413;
+        </small>
+        <small>
+          &#8413;
+        </small>
         <span style={{
-          position: 'relative',
-          left: '4px',
-          fontSize: '0.7em',
+          fontSize: '0.8em',
           fontWeight: 'lighter'
         }}>N</span>
       </h1>

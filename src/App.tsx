@@ -8,7 +8,6 @@ function App() {
       <div className="App">
         <header className="App-header">
           <Logo/>
-          <button onClick={googleAuth}>enter</button>
         </header>
       </div>
   );
