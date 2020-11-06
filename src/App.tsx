@@ -1,16 +1,15 @@
 import React from 'react'
-import { Logo } from './components/Logo'
-import { googleAuth } from './firebase'
+import { Auth } from './features/Auth'
 import './App.css'
 
 function App() {
   return (
       <div className="App">
         <header className="App-header">
-          <Logo/>
+          <Auth/>
         </header>
       </div>
-  );
+  )
 }
 
 export default App
