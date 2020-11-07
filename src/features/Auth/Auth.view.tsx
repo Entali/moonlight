@@ -39,6 +39,7 @@ const Auth = () => {
           .then((doc) => doc.data())
 
       dispatch(setUserAction(newUser as UserModel))
+      dispatch(setErrorAction(null))
       return newUser
     } catch (err) {
       dispatch(setErrorAction(err.message))
@@ -50,7 +51,8 @@ const Auth = () => {
         <Logo/>
         <Button
             onClick={onClick}
-            variant="contained" color="primary"
+            disabled={state.error && true}
+            variant="contained" color="primary" size="large"
         >
           enter
         </Button>
