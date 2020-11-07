@@ -10,32 +10,36 @@ import { UserModel } from './Auth.models'
 const Auth = () => {
   const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
 
+  const makeUserRecord = (user: any) => {
+    return user && user.uid && {
+      id: user.uid,
+      name: user.displayName,
+      email: user.email,
+      img: user.photoURL
+    }
+  }
+
   const onClick = useCallback(async () => {
     try {
       const { user } = await googleAuth()
-      if (user && user.uid) {
-        // in some reason there is undefined returns from promise
-        // while setting user to DB
-        await firestore
-            .collection('users')
-            .doc(user.uid)
-            .set({
-              id: user.uid,
-              name: user.displayName,
-              email: user.email,
-              img: user.photoURL
-            })
-        // that's why getter goes right after set
-        const userRecord = await firestore
-            .collection('users')
-            .doc(user.uid)
-            .get()
-            .then((doc) => doc.data())
+      const userRecord = await makeUserRecord(user)
 
-        if (userRecord && userRecord.id) {
-          dispatch(setUserAction(userRecord as UserModel))
-        }
-      }
+      // in some reason there is undefined returns from promise
+      // while setting user to DB
+      await firestore
+          .collection('users')
+          .doc(userRecord.id)
+          .set(userRecord)
+
+      // that's why getter goes right after set
+      const newUser = await firestore
+          .collection('users')
+          .doc(userRecord.id)
+          .get()
+          .then((doc) => doc.data())
+
+      dispatch(setUserAction(newUser as UserModel))
+      return newUser
     } catch (err) {
       dispatch(setErrorAction(err.message))
     }
