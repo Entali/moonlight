@@ -1,27 +1,34 @@
-import React, { useEffect, useReducer } from 'react'
+import React, {useCallback, useReducer} from 'react'
 import { setUserAction } from './Auth.actions'
 import { INITIAL_STATE, authReducer } from './Auth.reducer'
 import { Button } from 'primereact/button'
 import { Logo } from '../../components/Logo'
 import { googleAuth } from '../../firebase'
-// @ts-ignore
-import SunCalc from 'suncalc'
+import { firestore } from '../../firebase'
 
 const Auth = () => {
-  const [dispatch] = useReducer(authReducer, INITIAL_STATE);
-  const onClick = () => {
-    googleAuth().then((user) => dispatch(setUserAction(user)))
-  }
+  const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
 
-  useEffect(() => {
-    console.log('Moon Position', SunCalc.getMoonPosition(
-        new Date(),
-        50.450100,
-        30.523399
-    ))
-
-    console.log('Moon Illumination', SunCalc.getMoonIllumination(new Date()))
-  })
+  const onClick = useCallback(() => {
+    googleAuth()
+        .then(({ user }) => {
+          const userRecord = {
+            id: user?.uid,
+            name: user?.displayName,
+            email: user?.email,
+            img: user?.photoURL
+          }
+          // пишу в базу
+          firestore
+              .collection('users')
+              .doc(userRecord.id)
+              .set(userRecord)
+              .then(() => {
+                // пишу в редюсер
+                dispatch(setUserAction(userRecord))
+              })
+        })
+  }, [])
 
   return (
       <section className="Auth">
