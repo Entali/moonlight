@@ -25,7 +25,7 @@ const Auth = () => {
       const userRecord = await makeUserRecord(user)
 
       // in some reason there is undefined returns from promise
-      // while setting user to DB
+      // after setting user to DB
       await firestore
           .collection('users')
           .doc(userRecord.id)

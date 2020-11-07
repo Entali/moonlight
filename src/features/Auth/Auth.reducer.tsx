@@ -9,6 +9,11 @@ const authReducer = (state: any, action: any) => {
         ...state,
         currentUser: action.payload
       }
+    case 'SET_ERROR':
+      return {
+        ...state,
+        error: action.payload
+      }
     default:
       return state;
   }
