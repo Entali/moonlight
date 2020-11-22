@@ -23,18 +23,42 @@ const makeUser = (user: any) => {
   }
 }
 
-const createUserRecord = async (authMethod: any, dispatch: any) => {
+const createNewUserRecord = async (user: UserModel, userRef: any, dispatch: any) => {
+  const newUser = await makeUser(user)
+
+  try {
+    // writing to DB
+    await userRef.set(newUser)
+    // setting to store
+    await dispatch(setUserAction(newUser as UserModel))
+    dispatch(setErrorAction(null))
+  } catch (err) {
+    dispatch(setErrorAction(err))
+  }
+
+  return Promise.resolve(newUser)
+}
+
+const authAction = async (authMethod: any, dispatch: any) => {
   if (!authMethod) return
 
-  const userRef = firestore.doc('users/3878327468723648')
+  const { user } = await authMethod()
+
+  // check if it exists in DB
+  const userRef = firestore.doc(`users/${user.uid}`)
   const snapShot = await userRef.get()
 
-  console.log('snapshot', snapShot)
+  return Promise.resolve(
+      snapShot.exists
+      ? firestore
+          .collection('users')
+          .doc(user.uid)
+          .get()
+          .then(doc => doc.data())
+      : createNewUserRecord(user, userRef, dispatch)
+  )
 }
 
 export {
-  setUserAction,
-  setErrorAction,
-  makeUser,
-  createUserRecord
+  authAction
 }
