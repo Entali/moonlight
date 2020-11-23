@@ -19,7 +19,7 @@ const makeUser = (user: any) => {
     name: user.displayName,
     email: user.email,
     img: user.photoURL,
-    created: new Date()
+    created: +new Date()
   }
 }
 

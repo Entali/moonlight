@@ -3,7 +3,7 @@ interface UserModel {
   name: string,
   email: string,
   img: string,
-  created: Date | string
+  created: Date | string | number
 }
 
 export type {

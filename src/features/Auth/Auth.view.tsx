@@ -12,7 +12,7 @@ const Auth = () => {
   const onClick = useCallback(() => {
     authAction(googleAuth, dispatch).then(user => {
       console.log(
-          moment(user?.created.toDate()).format('MMMM Do YYYY, h:mm:ss a')
+          moment(user?.created).format('MMMM Do YYYY, h:mm:ss a')
       )
     })
   }, [])
