@@ -6,6 +6,25 @@ import Button from '@material-ui/core/Button'
 import { googleAuth } from '../../firebase'
 import moment from 'moment'
 
+type BtnProps = {
+  error: boolean,
+  text: string,
+  onClick: () => void
+}
+
+const Btn = (props: BtnProps) => {
+  const { error, text, onClick } = props
+    return (
+        <Button
+            onClick={onClick}
+            disabled={error && true}
+            variant="contained" color="default" size="large"
+        >
+          {text}
+        </Button>
+    )
+}
+
 const Auth = () => {
   const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
 
@@ -20,13 +39,8 @@ const Auth = () => {
   return (
       <section className="Auth">
         <Logo/>
-        <Button
-            onClick={onClick}
-            disabled={state.error && true}
-            variant="contained" color="primary" size="large"
-        >
-          enter
-        </Button>
+        <Btn text="google" error={state.error} onClick={onClick}/>
+        <Btn text="email" error={state.error} onClick={onClick}/>
       </section>
   );
 };
