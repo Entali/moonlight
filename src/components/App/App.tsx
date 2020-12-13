@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router'
-import Routes from './router'
+import Routes from '../../router'
 import './App.css'
 
 const INITIAL_STATE = {}
 
-type Props = RouteComponentProps & {}
+type Props = RouteComponentProps
+type State = {}
 
-class App extends Component<Props> {
+class App extends Component<Props, State> {
   state = INITIAL_STATE
 
   render() {
-    console.log('App props', this.props)
     return (
         <section className="App">
           <Routes/>
