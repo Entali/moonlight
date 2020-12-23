@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useRef} from 'react'
+import React, { useEffect, useReducer } from 'react'
 import Routes from '../../router'
 import './App.css'
 import { auth } from '../../firebase'
