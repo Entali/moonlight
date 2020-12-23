@@ -1,23 +1,29 @@
-import React, { Component } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router'
+import React, { useEffect } from 'react'
 import Routes from '../../router'
 import './App.css'
+import { auth } from '../../firebase'
+import { getUserRef } from '../../features/Auth/Auth.actions'
 
-const INITIAL_STATE = {}
+const App = () => {
+  let unsubscribeFromAuth: any = null
 
-type Props = RouteComponentProps
-type State = {}
+  useEffect(() => {
+    unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (!userAuth) return
+      console.log('userAuth',userAuth)
 
-class App extends Component<Props, State> {
-  state = INITIAL_STATE
+      await getUserRef(userAuth)
+    })
+    return () => {
+      unsubscribeFromAuth()
+    }
+  }, [])
 
-  render() {
-    return (
-        <section className="App">
-          <Routes/>
-        </section>
-    )
-  }
+  return (
+      <section className="App">
+        <Routes/>
+      </section>
+  )
 }
 
-export default withRouter(App)
+export default App
