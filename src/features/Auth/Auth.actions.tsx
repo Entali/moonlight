@@ -13,7 +13,6 @@ const setErrorAction = (error: ErrorType) => ({
   payload: error
 });
 
-
 const makeUser = (user: any) => {
   return user && user.uid && {
     id: user.uid,
@@ -26,21 +25,20 @@ const makeUser = (user: any) => {
 
 const getUserRef = async (userAuth: any, dispatch: any) => {
   const userRef = firestore.doc(`users/${userAuth.uid}`)
+  const newUser = makeUser(userAuth)
   const snapShot = await userRef.get()
 
   dispatch(setErrorAction(null))
 
   if (!snapShot.exists) {
-    const newUser = makeUser(userAuth)
-
     try {
       await userRef.set(newUser)
-      await dispatch(setUserAction(newUser as UserModel))
     } catch (err) {
       dispatch(setErrorAction(err))
     }
   }
 
+  dispatch(setUserAction(newUser as UserModel))
   return userRef
 }
 
