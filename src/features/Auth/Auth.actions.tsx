@@ -24,17 +24,20 @@ const makeUser = (user: any) => {
   }
 }
 
-const getUserRef = async (userAuth: any) => {
+const getUserRef = async (userAuth: any, dispatch: any) => {
   const userRef = firestore.doc(`users/${userAuth.uid}`)
   const snapShot = await userRef.get()
+
+  dispatch(setErrorAction(null))
 
   if (!snapShot.exists) {
     const newUser = makeUser(userAuth)
 
     try {
       await userRef.set(newUser)
+      dispatch(setUserAction(newUser))
     } catch (err) {
-      console.error('Error creating user: ', err)
+      dispatch(setErrorAction(err))
     }
   }
 
