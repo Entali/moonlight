@@ -7,6 +7,7 @@ import {
   authReducer,
   INITIAL_STATE as AUTH_INITIAL_STATE
 } from '../../features/Auth/Auth.reducer'
+import Button from '@material-ui/core/Button'
 
 const App = () => {
   const [authState, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE)
@@ -25,6 +26,14 @@ const App = () => {
 
   return (
       <section className="App">
+        <nav style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          padding: '20px'
+        }}>
+          <Button>Sign in</Button>
+          <Button>Sign out</Button>
+        </nav>
         <Routes/>
       </section>
   )

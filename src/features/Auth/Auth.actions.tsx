@@ -35,7 +35,7 @@ const getUserRef = async (userAuth: any, dispatch: any) => {
 
     try {
       await userRef.set(newUser)
-      dispatch(setUserAction(newUser))
+      await dispatch(setUserAction(newUser as UserModel))
     } catch (err) {
       dispatch(setErrorAction(err))
     }
