@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from 'react'
+import React, { useReducer } from 'react'
 import { INITIAL_STATE, authReducer } from './Auth.reducer'
 import { Logo } from '../../components/Logo'
 import Button from '@material-ui/core/Button'

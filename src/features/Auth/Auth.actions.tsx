@@ -1,16 +1,9 @@
 import { firestore } from '../../firebase'
 import { UserModel } from './Auth.models'
 
-type ErrorType = string | null
-
 const setUserAction = (user: UserModel) => ({
   type: 'SET_USER',
   payload: user
-});
-
-const setErrorAction = (error: ErrorType) => ({
-  type: 'SET_ERROR',
-  payload: error
 });
 
 const makeUser = (user: any) => {
@@ -28,20 +21,18 @@ const getUserRef = async (userAuth: any, dispatch: any) => {
   const newUser = makeUser(userAuth)
   const snapShot = await userRef.get()
 
-  dispatch(setErrorAction(null))
-
   if (!snapShot.exists) {
     try {
       await userRef.set(newUser)
     } catch (err) {
-      dispatch(setErrorAction(err))
+      console.error('Auth: error while creating user')
     }
   }
 
-  dispatch(setUserAction(newUser as UserModel))
   return userRef
 }
 
 export {
-  getUserRef
+  getUserRef,
+  setUserAction
 }

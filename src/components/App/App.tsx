@@ -2,12 +2,16 @@ import React, { useEffect, useReducer } from 'react'
 import Routes from '../../router'
 import './App.css'
 import { auth } from '../../firebase'
-import { getUserRef } from '../../features/Auth/Auth.actions'
+import {
+  getUserRef,
+  setUserAction
+} from '../../features/Auth/Auth.actions'
 import {
   authReducer,
   INITIAL_STATE as AUTH_INITIAL_STATE
 } from '../../features/Auth/Auth.reducer'
 import Button from '@material-ui/core/Button'
+import {UserModel} from "../../features/Auth/Auth.models";
 
 const App = () => {
   const [authState, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE)
@@ -17,7 +21,11 @@ const App = () => {
   useEffect(() => {
     unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (!userAuth) return
-      await getUserRef(userAuth, dispatch)
+      const userRef = await getUserRef(userAuth, dispatch)
+
+      userRef.onSnapshot(snapshot => {
+        dispatch(setUserAction(snapshot.data() as UserModel))
+      })
     })
 
     return () => unsubscribeFromAuth()
