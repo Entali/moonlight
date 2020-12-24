@@ -11,7 +11,7 @@ import {
   INITIAL_STATE as AUTH_INITIAL_STATE
 } from '../../features/Auth/Auth.reducer'
 import Button from '@material-ui/core/Button'
-import {UserModel} from "../../features/Auth/Auth.models";
+import { UserModel } from '../../features/Auth/Auth.models'
 
 const App = () => {
   const [authState, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE)
