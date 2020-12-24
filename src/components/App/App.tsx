@@ -1,40 +1,12 @@
-import React, { useEffect, useReducer } from 'react'
+import React from 'react'
 import Routes from '../../router'
-import './App.css'
-import { auth } from '../../firebase'
-import {
-  createUserRef,
-  setUserAction
-} from '../../features/Auth/Auth.actions'
-import {
-  authReducer,
-  INITIAL_STATE as AUTH_INITIAL_STATE
-} from '../../features/Auth/Auth.reducer'
 import Button from '@material-ui/core/Button'
-import { UserModel } from '../../features/Auth/Auth.models'
 import { Logo } from '../Logo'
+import useAuth from '../../hooks/useAuth'
+import './App.css'
 
 const App = () => {
-  const [authState, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE)
-  let unsubscribeFromAuth: any = null
-  const { currentUser } = authState
-
-  useEffect(() => {
-    unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserRef(userAuth)
-
-        userRef.onSnapshot(snapshot => {
-          dispatch(setUserAction(snapshot.data() as UserModel))
-        })
-      }
-
-      dispatch(setUserAction(null))
-    })
-
-    return () => unsubscribeFromAuth()
-  }, [])
-
+  const { currentUser } = useAuth()
 
   return (
       <section className="App">
