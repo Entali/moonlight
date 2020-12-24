@@ -41,7 +41,6 @@ const Auth = () => {
 
   return (
       <section className="Auth">
-        <Logo/>
         <ButtonGroup orientation="vertical">
           <Btn text="google" error={state.error}/>
           <Btn text="email" error={state.error}/>

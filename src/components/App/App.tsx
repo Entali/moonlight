@@ -12,6 +12,7 @@ import {
 } from '../../features/Auth/Auth.reducer'
 import Button from '@material-ui/core/Button'
 import { UserModel } from '../../features/Auth/Auth.models'
+import {Logo} from "../Logo";
 
 const App = () => {
   const [authState, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE)
@@ -21,7 +22,7 @@ const App = () => {
   useEffect(() => {
     unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (!userAuth) return
-      const userRef = await getUserRef(userAuth, dispatch)
+      const userRef = await getUserRef(userAuth)
 
       userRef.onSnapshot(snapshot => {
         dispatch(setUserAction(snapshot.data() as UserModel))
@@ -38,17 +39,17 @@ const App = () => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '20px'
+          padding: '10px 20px'
         }}>
           {currentUser ? (
             <>
+              <Logo/>
               <span>{currentUser.name}</span>
               <Button>Logout</Button>
             </>
           ) : (
             <>
-              <span/>
-              <Button>Login</Button>
+              <Logo/>
             </>
           )}
         </nav>

@@ -16,7 +16,7 @@ const makeUser = (user: any) => {
   }
 }
 
-const getUserRef = async (userAuth: any, dispatch: any) => {
+const getUserRef = async (userAuth: any) => {
   const userRef = firestore.doc(`users/${userAuth.uid}`)
   const newUser = makeUser(userAuth)
   const snapShot = await userRef.get()
