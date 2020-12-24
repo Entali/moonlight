@@ -1,7 +1,7 @@
 import { firestore } from '../../firebase'
 import { UserModel } from './Auth.models'
 
-const setUserAction = (user: UserModel) => ({
+const setUserAction = (user: UserModel | null) => ({
   type: 'SET_USER',
   payload: user
 });

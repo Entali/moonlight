@@ -21,12 +21,15 @@ const App = () => {
 
   useEffect(() => {
     unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (!userAuth) return
-      const userRef = await createUserRef(userAuth)
+      if (userAuth) {
+        const userRef = await createUserRef(userAuth)
 
-      userRef.onSnapshot(snapshot => {
-        dispatch(setUserAction(snapshot.data() as UserModel))
-      })
+        userRef.onSnapshot(snapshot => {
+          dispatch(setUserAction(snapshot.data() as UserModel))
+        })
+      }
+
+      dispatch(setUserAction(null))
     })
 
     return () => unsubscribeFromAuth()
