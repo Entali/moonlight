@@ -1,1 +1,1 @@
-export { default as Auth } from './Auth.view';
+export {default as Auth} from './Auth.view';

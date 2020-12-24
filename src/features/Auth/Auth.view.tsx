@@ -1,9 +1,8 @@
-import React, { useReducer } from 'react'
-import { INITIAL_STATE, authReducer } from './Auth.reducer'
-import { Logo } from '../../components/Logo'
+import React, {useReducer} from 'react'
+import {INITIAL_STATE, authReducer} from './Auth.reducer'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
-import { googleAuth } from '../../firebase'
+import {googleAuth} from '../../firebase'
 
 type BtnProps = {
   error: boolean,
@@ -12,19 +11,19 @@ type BtnProps = {
 }
 
 const Btn = (props: BtnProps) => {
-  const { error, text, onClick } = props
-    return (
-        <Button
-            style={{
-              margin: '10px'
-            }}
-            onClick={onClick}
-            disabled={error && true}
-            variant="contained" color="default" size="large"
-        >
-          {text}
-        </Button>
-    )
+  const {error, text, onClick} = props
+  return (
+      <Button
+          style={{
+            margin: '10px'
+          }}
+          onClick={onClick}
+          disabled={error && true}
+          variant="contained" color="default" size="large"
+      >
+        {text}
+      </Button>
+  )
 }
 
 const Auth = () => {

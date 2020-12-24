@@ -1,7 +1,7 @@
 import {useEffect, useReducer} from 'react'
-import { auth } from '../firebase'
-import { createUserRef, setUserAction } from '../features/Auth/Auth.actions'
-import { UserModel } from '../features/Auth/Auth.models'
+import {auth} from '../firebase'
+import {createUserRef, setUserAction} from '../features/Auth/Auth.actions'
+import {UserModel} from '../features/Auth/Auth.models'
 import {
   authReducer,
   INITIAL_STATE as AUTH_INITIAL_STATE
@@ -10,7 +10,7 @@ import {
 const useAuth = () => {
   let unsubscribeFromAuth: any = null
   const [authState, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE)
-  const { currentUser } = authState
+  const {currentUser} = authState
 
   useEffect(() => {
     unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -28,7 +28,7 @@ const useAuth = () => {
     return () => unsubscribeFromAuth()
   }, [])
 
-  return { currentUser }
+  return {currentUser}
 }
 
 export default useAuth

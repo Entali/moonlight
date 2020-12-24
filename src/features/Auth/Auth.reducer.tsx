@@ -3,7 +3,7 @@ const INITIAL_STATE: any = {
 }
 
 const authReducer = (state: any, action: any) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'SET_USER':
       return {
         ...state,
