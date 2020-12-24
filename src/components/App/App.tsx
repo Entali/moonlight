@@ -3,7 +3,7 @@ import Routes from '../../router'
 import './App.css'
 import { auth } from '../../firebase'
 import {
-  getUserRef,
+  createUserRef,
   setUserAction
 } from '../../features/Auth/Auth.actions'
 import {
@@ -22,7 +22,7 @@ const App = () => {
   useEffect(() => {
     unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (!userAuth) return
-      const userRef = await getUserRef(userAuth)
+      const userRef = await createUserRef(userAuth)
 
       userRef.onSnapshot(snapshot => {
         dispatch(setUserAction(snapshot.data() as UserModel))
