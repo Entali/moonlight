@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button'
 const App = () => {
   const [authState, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE)
   let unsubscribeFromAuth: any = null
-  const { currentUser, isLoading } = authState
+  const { currentUser } = authState
 
   useEffect(() => {
     unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -32,19 +32,17 @@ const App = () => {
           alignItems: 'center',
           padding: '20px'
         }}>
-          {!isLoading ? (
-              currentUser ? (
-                <>
-                  <span>{currentUser.name}</span>
-                  <Button>Logout</Button>
-                </>
-              ) : (
-                <>
-                  <span/>
-                  <Button>Login</Button>
-                </>
-              )
-          ) : <div>Loading...</div>}
+          {currentUser ? (
+            <>
+              <span>{currentUser.name}</span>
+              <Button>Logout</Button>
+            </>
+          ) : (
+            <>
+              <span/>
+              <Button>Login</Button>
+            </>
+          )}
         </nav>
         <Routes/>
       </section>
