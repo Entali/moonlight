@@ -6,7 +6,7 @@ import useAuth from '../../hooks/useAuth'
 import './App.css'
 
 const App = () => {
-  const {currentUser} = useAuth()
+  const {currentUser, logout} = useAuth()
 
   return (
       <section className="App">
@@ -20,7 +20,7 @@ const App = () => {
               <>
                 <Logo/>
                 <span>{currentUser.name}</span>
-                <Button>Logout</Button>
+                <Button onClick={logout}>Logout</Button>
               </>
           ) : (
               <>

@@ -28,7 +28,9 @@ const useAuth = () => {
     return () => unsubscribeFromAuth()
   }, [])
 
-  return {currentUser}
+  const logout = () => dispatch(setUserAction(null))
+
+  return {currentUser, logout}
 }
 
 export default useAuth
