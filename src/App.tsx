@@ -3,6 +3,14 @@ import Routes from './router'
 import {Header} from './components/Header'
 import {auth} from './firebase'
 
+export type CurrentUserModel = {
+  id: string,
+  name: string | null,
+  email: string | null,
+  img: string | null,
+  created: Date | string
+} | null
+
 class App extends Component {
   state = {
     currentUser: null
@@ -13,8 +21,7 @@ class App extends Component {
   componentDidMount() {
     // login & logout listener
     this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      console.log('onAuthStateChanged - user:', user)
-      const currentUser = user && {
+      const currentUser: CurrentUserModel = user && {
         id: user.uid,
         name: user.displayName,
         email: user.email,

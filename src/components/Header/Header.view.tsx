@@ -1,7 +1,13 @@
 import React from 'react'
-import Button from "@material-ui/core/Button"
+import Button from '@material-ui/core/Button'
+import {CurrentUserModel} from '../../App'
 
-const HeaderView = ({logout, currentUser}: any) => {
+type Props = {
+  logout: () => void,
+  currentUser: CurrentUserModel
+}
+
+const HeaderView = ({logout, currentUser}: Props) => {
   return (
       <header style={{
         padding: '10px',
