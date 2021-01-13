@@ -1,10 +1,10 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import {CurrentUserModel} from '../../App'
+import {UserModel} from '../../App'
 
 type Props = {
   logout: () => void,
-  currentUser: CurrentUserModel
+  currentUser: UserModel
 }
 
 const HeaderView = ({logout, currentUser}: Props) => {

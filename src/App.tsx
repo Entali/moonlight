@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import Routes from './router'
 import {Header} from './components/Header'
 import {auth} from './firebase'
+import {createUserProfileDocument} from './features/Auth'
 
-export type CurrentUserModel = {
-  id: string,
+export type UserModel = {
   name: string | null,
   email: string | null,
   img: string | null,
@@ -12,22 +12,13 @@ export type CurrentUserModel = {
 } | null
 
 class App extends Component {
-  state = {
-    currentUser: null
-  }
-
+  state = { currentUser: null }
   unsubscribeFromAuth: any = null
 
   componentDidMount() {
     // login & logout listener
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      const currentUser: CurrentUserModel = user && {
-        id: user.uid,
-        name: user.displayName,
-        email: user.email,
-        img: user.photoURL,
-        created: new Date()
-      }
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
+      const currentUser = await createUserProfileDocument(user)
       this.setState({ currentUser })
     })
   }
