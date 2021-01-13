@@ -1,12 +1,26 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Routes from '../../router'
 import Button from '@material-ui/core/Button'
 import {Logo} from '../Logo'
-import useAuth from '../../hooks/useAuth'
+import {auth} from '../../firebase'
 import './App.css'
 
-const App = () => {
-  const {currentUser, logout} = useAuth()
+class App extends Component {
+
+
+
+  useEffect(() => {
+    auth.onAuthStateChanged(userAuth => {
+      if(userAuth) {
+        console.log('+', userAuth)
+        userAuth.delete().then(what => console.log('what',what))
+      } else {
+        console.log('-')
+      }
+    })
+
+    // return () => unsubscribeFromAuth(userAuth).then(() => {})
+  }, [])
 
   return (
       <section className="App">

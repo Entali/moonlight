@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react'
+import React, {useReducer, useCallback} from 'react'
 import {INITIAL_STATE, authReducer} from './Auth.reducer'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
@@ -27,22 +27,23 @@ const Btn = (props: BtnProps) => {
 }
 
 const Auth = () => {
-  const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
+  const [state] = useReducer(authReducer, INITIAL_STATE);
 
-  // const onClick = useCallback(() => {
-  //   authAction(googleAuth, dispatch).then(user => {
-  //     console.log(
-  //         'user', user,
-  //         // moment(user?.created).format('MMMM Do YYYY, h:mm:ss a')
-  //     )
-  //   })
-  // }, [])
+  const onClick = useCallback(() => {
+    googleAuth().then(google => console.log('google',google))
+    // authAction(googleAuth, dispatch).then(user => {
+    //   console.log(
+    //       'user', user,
+    //       // moment(user?.created).format('MMMM Do YYYY, h:mm:ss a')
+    //   )
+    // })
+  }, [])
 
   return (
       <section className="Auth">
         <ButtonGroup orientation="vertical">
-          <Btn text="google" error={state.error}/>
-          <Btn text="email" error={state.error}/>
+          <Btn text="google" error={state.error} onClick={onClick}/>
+          {/*<Btn text="email" error={state.error}/>*/}
         </ButtonGroup>
       </section>
   );
