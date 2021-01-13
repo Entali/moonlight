@@ -7,16 +7,23 @@ type Props = {
   currentUser: UserModel
 }
 
-const HeaderView = ({logout, currentUser}: Props) => {
+const HeaderView = ({ logout, currentUser }: Props) => {
   return (
       <header style={{
+        height: '70px',
         padding: '10px',
         textAlign: 'right'
       }}>
         {currentUser && (
-          <Button onClick={logout}>
-            Exit
-          </Button>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}>
+            <p>{currentUser.email}</p>
+            <Button onClick={logout}>
+              exit
+            </Button>
+          </div>
         )}
       </header>
   )

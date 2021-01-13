@@ -1,28 +1,25 @@
-import {UserModel} from '../../App'
-import {firestore} from "../../firebase";
+import {firestore} from '../../firebase'
 
 const createUserProfileDocument = async (userAuth: any) => {
-  if (!userAuth) return null
-
   const userRef = firestore.doc(`/users/${userAuth.uid}`)
   const snapShot = await userRef.get()
 
-  const currentUser: UserModel = userAuth && {
-    name: userAuth.displayName,
-    email: userAuth.email,
-    img: userAuth.photoURL,
-    created: new Date()
-  }
-
   if (!snapShot.exists) {
     try {
-      await userRef.set(currentUser)
+      const { uid, displayName, email, photoURL } = userAuth
+      await userRef.set({
+        id: uid,
+        displayName,
+        email,
+        photoURL,
+        created: new Date()
+      })
     } catch (err) {
       console.error('createUserProfileDocument error: ', err)
     }
   }
 
-  return currentUser
+  return userRef
 }
 
 export {

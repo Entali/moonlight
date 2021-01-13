@@ -17,9 +17,14 @@ class App extends Component {
 
   componentDidMount() {
     // login & logout listener
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
-      const currentUser = await createUserProfileDocument(user)
-      this.setState({ currentUser })
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth)
+        userRef.onSnapshot(snapShot => {
+          this.setState({ currentUser: snapShot.data() })
+        })
+      }
+      this.setState({ currentUser: null })
     })
   }
 
