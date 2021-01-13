@@ -1,11 +1,18 @@
 import React from 'react'
+import Button from "@material-ui/core/Button"
 
-const HeaderView = () => {
+const HeaderView = ({logout, currentUser}: any) => {
   return (
       <header style={{
         padding: '10px',
-        textAlign: 'center'
-      }}>header</header>
+        textAlign: 'right'
+      }}>
+        {currentUser && (
+          <Button onClick={logout}>
+            Exit
+          </Button>
+        )}
+      </header>
   )
 }
 

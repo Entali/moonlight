@@ -13,6 +13,7 @@ class App extends Component {
   componentDidMount() {
     // login & logout listener
     this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      console.log('onAuthStateChanged - user:', user)
       const currentUser = user && {
         id: user.uid,
         name: user.displayName,
@@ -28,10 +29,15 @@ class App extends Component {
     this.unsubscribeFromAuth()
   }
 
+  logout = () => {
+    this.setState({ currentUser: null })
+    return auth.signOut()
+  }
+
   render() {
     return (
         <section className="App">
-          <Header/>
+          <Header currentUser={this.state.currentUser} logout={this.logout}/>
           <Routes/>
         </section>
     )
