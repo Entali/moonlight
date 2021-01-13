@@ -4,6 +4,9 @@ import {Header} from './components/Header'
 import {auth} from './firebase'
 
 class App extends Component {
+  state = {
+    currentUser: null
+  }
 
   componentDidMount() {
     // login & logout listener
