@@ -2,7 +2,10 @@ import React from 'react'
 
 const HeaderView = () => {
   return (
-      <header>header</header>
+      <header style={{
+        padding: '10px',
+        textAlign: 'center'
+      }}>header</header>
   )
 }
 

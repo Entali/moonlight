@@ -1,29 +1,19 @@
-import React, {Component} from 'react'
-import {auth} from '../../firebase'
+import React from 'react'
 import {SignIn} from '../SignIn'
 
-class HomeView extends Component {
-  componentDidMount() {
-    auth.onAuthStateChanged(userAuth => {
-      console.log('userAuth', userAuth)
-    })
-  }
-
-  render() {
-    return (
-        <section
-            className="Home"
-            style={{
-              height: '100vh',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-        >
-          <SignIn/>
-        </section>
-    )
-  }
+const HomeView = () => {
+  return (
+      <div className="Home"
+           style={{
+             margin: '20px',
+             display: 'flex',
+             flexDirection: 'column',
+             justifyContent: 'center',
+             alignItems: 'center'
+           }}>
+        <SignIn/>
+      </div>
+  )
 }
 
 export default HomeView

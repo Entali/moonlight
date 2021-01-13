@@ -4,12 +4,12 @@ import reportWebVitals from './reportWebVitals'
 import {BrowserRouter as Router} from 'react-router-dom'
 import './firebase'
 import './index.css'
-import Routes from './router'
+import App from './App'
 
 ReactDOM.render(
     <React.StrictMode>
       <Router>
-        <Routes/>
+        <App/>
       </Router>
     </React.StrictMode>,
     document.getElementById('root')
