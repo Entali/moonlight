@@ -8,11 +8,24 @@ class App extends Component {
     currentUser: null
   }
 
+  unsubscribeFromAuth: any = null
+
   componentDidMount() {
     // login & logout listener
-    auth.onAuthStateChanged(userAuth => {
-      console.log('userAuth', userAuth)
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      const currentUser = user && {
+        id: user.uid,
+        name: user.displayName,
+        email: user.email,
+        img: user.photoURL,
+        created: new Date()
+      }
+      this.setState({ currentUser })
     })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth()
   }
 
   render() {
