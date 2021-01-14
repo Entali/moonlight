@@ -19,7 +19,7 @@ const HeaderView = ({ logout, currentUser }: Props) => {
             display: 'flex',
             justifyContent: 'space-between'
           }}>
-            <p>{currentUser.email}</p>
+            <small>{currentUser.email}</small>
             <Button onClick={logout}>
               exit
             </Button>

@@ -38,10 +38,11 @@ class App extends Component {
   }
 
   render() {
+    const { currentUser } = this.state
     return (
         <section className="App">
-          <Header currentUser={this.state.currentUser} logout={this.logout}/>
-          <Routes/>
+          <Header currentUser={currentUser} logout={this.logout}/>
+          <Routes currentUser={currentUser}/>
         </section>
     )
   }

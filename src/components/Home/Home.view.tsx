@@ -1,7 +1,12 @@
 import React from 'react'
-import {SignIn} from '../SignIn'
+import {Auth} from '../../features/Auth'
+import {UserModel} from '../../App'
 
-const HomeView = () => {
+type Props = {
+  currentUser: UserModel
+}
+
+const HomeView = ({ currentUser}: Props) => {
   return (
       <div className="Home"
            style={{
@@ -11,7 +16,7 @@ const HomeView = () => {
              justifyContent: 'center',
              alignItems: 'center'
            }}>
-        <SignIn/>
+        {!currentUser ? <Auth/> : <p>Welcome, {currentUser.name}</p>}
       </div>
   )
 }

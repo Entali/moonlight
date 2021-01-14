@@ -1,15 +1,22 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
 import {Home} from './components/Home'
-import {SignIn} from './components/SignIn'
+import {Auth} from './features/Auth'
+import {UserModel} from './App'
 
-const Routes = () => {
+type Props = {
+  currentUser: UserModel
+}
+
+const Routes = ({ currentUser }: Props) => {
   return (
       <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/signin" component={SignIn}/>
+        <Route exact path="/">
+          <Home currentUser={currentUser}/>
+        </Route>
+        <Route exact path="/auth" component={Auth}/>
       </Switch>
-  );
-};
+  )
+}
 
 export default Routes
